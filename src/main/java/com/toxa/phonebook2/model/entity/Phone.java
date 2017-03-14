@@ -13,16 +13,16 @@ public class Phone {
     @Column
     private String name;
 
-    @Column(name = "last_name")
+    @Column
     private String lastName;
 
     @Column
     private String patronymic;
 
-    @Column(name = "phone_mobile")
+    @Column
     private String phoneMobile;
 
-    @Column(name = "phone_home")
+    @Column
     private String phoneHome;
 
     @Column
@@ -31,7 +31,7 @@ public class Phone {
     @Column
     private String email;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

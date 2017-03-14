@@ -17,10 +17,10 @@ public class User {
     @Column
     private String password;
 
-    @Column(name = "full_name")
+    @Column
     private String fullName;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Phone> phones = new HashSet<Phone>();
 
     public User() {

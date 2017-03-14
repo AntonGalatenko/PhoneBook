@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = RepositoryConfig.class)
@@ -55,13 +56,47 @@ public class PhoneTest extends AbstractJUnit4SpringContextTests{
             for(Phone ph : phonesFind)
                 assertEquals(phones.contains(ph), true);
 
-//            userDao.deleteUser(userFind);
+            userDao.deleteUser(userFind);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void InsertFinder(){
+        User user = new User("login", "password", "fullName");
+        Phone phone = new Phone("name123", "last name", "patronymic", "+380661234455",
+                "0445551122", "Kyev", "email@gmail.com", user);
+        Phone phone1 = new Phone("name123", "last name", "patronymic", "+380661234459",
+                "0445551122", "Kyev", "email@gmail.com", user);
+
+        try{
+            Phone p = phoneDao.addPhone(phone);
+            Phone phoneFinder = phoneDao.getPhone(p.getPhoneMobile());
+            assertEquals(phone, phoneFinder);
+            phoneDao.deletePhone(p.getPhoneMobile());
         }catch (Exception e){
             e.printStackTrace();
         }
 
-
-
-
     }
+
+
+
+    @Test
+    public void testDelete(){
+        User user = new User("login", "password", "fullName");
+        Phone phone = new Phone("name12", "last name", "patronymic", "+380661234455",
+                "0445551122", "Kyev", "email@gmail.com", user);
+        try{
+            Phone p = phoneDao.addPhone(phone);
+            Phone phoneFinder = phoneDao.getPhone(p.getPhoneMobile());
+            phoneDao.deletePhone(phoneFinder.getPhoneMobile());
+            Phone phoneAfterDelete = phoneDao.getPhone(phoneFinder.getPhoneMobile());
+            assertNull(phoneAfterDelete);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

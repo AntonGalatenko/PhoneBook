@@ -1,14 +1,9 @@
 package com.toxa.phonebook2.config;
 
-
-//import com.toxa.webstore5.model.repository.Repository;
-//import com.toxa.webstore5.model.repository.UserRepository;
-import com.toxa.phonebook2.model.Repository;
 import com.toxa.phonebook2.model.dao.PhoneDao;
 import com.toxa.phonebook2.model.dao.UserDao;
 import com.toxa.phonebook2.model.dao.impl.PhoneDaoImpl;
 import com.toxa.phonebook2.model.dao.impl.UserDaoImpl;
-import com.toxa.phonebook2.model.entity.Phone;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -60,15 +55,8 @@ public class RepositoryConfig {
                     .addProperties(hibernateProperties())
                     .buildSessionFactory();
         }
-
         return sessionFactory;
-
     }
-
-//    @Bean
-//    public Repository repository(){
-//        return new Repository();
-//    }
 
     @Bean
     public UserDao userDao(){

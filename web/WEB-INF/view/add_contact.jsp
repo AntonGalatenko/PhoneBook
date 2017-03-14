@@ -37,11 +37,23 @@
 						<input type="text" class="form-control" id="name" name="name" placeholder="Имя" required>
 					</div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Фамилия" required>
+                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Фамилия" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="patronymic" name="patronymic" placeholder="Отчество" required>
                     </div>
 					<div class="form-group">
-						<input type="text" class="form-control" id="phone" name="phone" placeholder="Телефон" required>
+						<input type="text" class="form-control" id="phone_mobile" name="phone_mobile" placeholder="Мобильный телефон" required>
 					</div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="phone_home" name="phone_home" placeholder="Домашний телефон" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Адрес" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="email" name="email" placeholder="E-mail" required>
+                    </div>
                     <div class="form-group">
                     <textarea class="form-control" type="textarea" id="description" name="description" placeholder="Описание" maxlength="140" rows="7"></textarea>
                         <span class="help-block"><p id="characterLeft" class="help-block ">Вы привысилы лимит символов</p></span>
