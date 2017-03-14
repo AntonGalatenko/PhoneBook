@@ -46,12 +46,9 @@ public class PhoneDaoImpl implements PhoneDao{
         Session session = sessionFactory.openSession();
         Phone phone = (Phone) session.createCriteria(Phone.class).add(Restrictions.eq("phoneMobile", phoneMobile)).uniqueResult();
         session.close();
-
-        System.out.println(phoneMobile + " || " + phone.getPhoneMobile());
         return phone;
     }
 
-    @Override
     public Collection<Phone> getAllPhones() {
         Session session = sessionFactory.openSession();
         List<Phone> phoneList = (List<Phone>) session.createCriteria(Phone.class).setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY).list();

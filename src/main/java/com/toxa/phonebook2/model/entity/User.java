@@ -1,5 +1,7 @@
 package com.toxa.phonebook2.model.entity;
 
+import com.toxa.phonebook2.model.entity.Enums.UserRoleEnum;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,6 +21,10 @@ public class User {
 
     @Column
     private String fullName;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private UserRole role;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Phone> phones = new HashSet<Phone>();
@@ -70,6 +76,14 @@ public class User {
 
     public void setPhones(Set<Phone> phones) {
         this.phones = phones;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 
     @Override

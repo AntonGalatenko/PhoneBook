@@ -25,18 +25,13 @@ public class HomeController {
 
     @RequestMapping(value = {"/", "/index**"})
     public ModelAndView index(){
-
         System.out.println("!!!!!!!!!!!!!!! INDEX");
 
-
-//        User user = new User("log", "pass", "FULL");
-
-//        Phone phone = new Phone("name", "lastName", "patronymic", "phoneMobile", "phoneHome", "address", "email");
-
-//        user.setPhone(phone);
-
-
-//        userServise.doSomeThings(user);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         return new ModelAndView("index","list", phoneDao.getAllPhones());
     }
@@ -45,6 +40,7 @@ public class HomeController {
     public ModelAndView addPhonePage(){
         User user = new User("login", "password", "fullName");
         userDao.addUser(user);
+
         Phone phone1 = new Phone("name1", "last name", "patronymic", "+380661234451",
                 "0445551121", "Kyev", "email1@gmail.com", user);
         Phone phone2 = new Phone("name2", "last name", "patronymic", "+380661234452",
@@ -78,7 +74,7 @@ public class HomeController {
     public ModelAndView deleteItem(@PathVariable String phoneMobile){
         System.out.println("!!!!!!!!!!!! method = RequestMethod.DELETE " + phoneMobile);
         phoneDao.deletePhone(phoneMobile);
-        return new ModelAndView("redirect:/index");
+        return new ModelAndView("redirect:/");
     }
 
 

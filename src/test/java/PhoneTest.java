@@ -67,21 +67,18 @@ public class PhoneTest extends AbstractJUnit4SpringContextTests{
         User user = new User("login", "password", "fullName");
         Phone phone = new Phone("name123", "last name", "patronymic", "+380661234455",
                 "0445551122", "Kyev", "email@gmail.com", user);
-        Phone phone1 = new Phone("name123", "last name", "patronymic", "+380661234459",
-                "0445551122", "Kyev", "email@gmail.com", user);
 
         try{
+            userDao.addUser(user);
             Phone p = phoneDao.addPhone(phone);
             Phone phoneFinder = phoneDao.getPhone(p.getPhoneMobile());
             assertEquals(phone, phoneFinder);
             phoneDao.deletePhone(p.getPhoneMobile());
+            userDao.deleteUser(user);
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
-
-
 
     @Test
     public void testDelete(){
@@ -89,11 +86,13 @@ public class PhoneTest extends AbstractJUnit4SpringContextTests{
         Phone phone = new Phone("name12", "last name", "patronymic", "+380661234455",
                 "0445551122", "Kyev", "email@gmail.com", user);
         try{
+            userDao.addUser(user);
             Phone p = phoneDao.addPhone(phone);
             Phone phoneFinder = phoneDao.getPhone(p.getPhoneMobile());
             phoneDao.deletePhone(phoneFinder.getPhoneMobile());
             Phone phoneAfterDelete = phoneDao.getPhone(phoneFinder.getPhoneMobile());
             assertNull(phoneAfterDelete);
+            userDao.deleteUser(user);
         }catch (Exception e){
             e.printStackTrace();
         }
