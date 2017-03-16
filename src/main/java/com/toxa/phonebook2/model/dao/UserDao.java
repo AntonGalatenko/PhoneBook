@@ -7,5 +7,6 @@ public interface UserDao {
     public User addUser(User user);
     public void updateUser(User user);
     public User getUser(Integer id);
+    public User getUser(String login);
     public void deleteUser(User user);
 }

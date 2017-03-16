@@ -2,7 +2,6 @@ package com.toxa.phonebook2.model.entity.Enums;
 
 public enum UserRoleEnum {
 
-    ANONYMOUS("ANONYMOUS"),
     USER ("USER");
 
     private String userRoleType;

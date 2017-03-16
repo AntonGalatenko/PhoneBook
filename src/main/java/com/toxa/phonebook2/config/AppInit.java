@@ -30,8 +30,8 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
         return new String[]{"/"};
     }
 
-//    @Override
-//    protected Filter[] getServletFilters() {
-//        return new Filter[]{new EncodingFilter()};
-//    }
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[]{new EncodingFilter()};
+    }
 }

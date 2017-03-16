@@ -6,10 +6,7 @@ import com.toxa.phonebook2.model.entity.Phone;
 import com.toxa.phonebook2.model.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -38,25 +35,33 @@ public class HomeController {
 
     @RequestMapping(value = "/add_contact", method = RequestMethod.GET)
     public ModelAndView addPhonePage(){
-        User user = new User("login", "password", "fullName");
-        userDao.addUser(user);
-
-        Phone phone1 = new Phone("name1", "last name", "patronymic", "+380661234451",
-                "0445551121", "Kyev", "email1@gmail.com", user);
-        Phone phone2 = new Phone("name2", "last name", "patronymic", "+380661234452",
-                "0445551122", "Kyev", "email2@gmail.com", user);
-        Phone phone3 = new Phone("name3", "last name", "patronymic", "+380661234453",
-                "0445551123", "Kyev", "email3@gmail.com", user);
-        Phone phone4 = new Phone("name4", "last name", "patronymic", "+380661234454",
-                "0445551124", "Kyev", "email4@gmail.com", user);
-        phoneDao.addPhone(phone1);
-        phoneDao.addPhone(phone2);
-        phoneDao.addPhone(phone3);
-        phoneDao.addPhone(phone4);
+//        User user = new User("login", "password", "fullName");
+//        userDao.addUser(user);
+//
+//        Phone phone1 = new Phone("name1", "last name", "patronymic", "+380661234451",
+//                "0445551121", "Kyev", "email1@gmail.com", user);
+//        Phone phone2 = new Phone("name2", "last name", "patronymic", "+380661234452",
+//                "0445551122", "Kyev", "email2@gmail.com", user);
+//        Phone phone3 = new Phone("name3", "last name", "patronymic", "+380661234453",
+//                "0445551123", "Kyev", "email3@gmail.com", user);
+//        Phone phone4 = new Phone("name4", "last name", "patronymic", "+380661234454",
+//                "0445551124", "Kyev", "email4@gmail.com", user);
+//        phoneDao.addPhone(phone1);
+//        phoneDao.addPhone(phone2);
+//        phoneDao.addPhone(phone3);
+//        phoneDao.addPhone(phone4);
         return new ModelAndView("add_contact");
     }
 
-    @RequestMapping(value = "/add_contact", method = RequestMethod.POST)
+//    @RequestMapping(value = "/add_contact", method = RequestMethod.POST)
+//    public ModelAndView addPhoneForm(@ModelAttribute Phone phone){
+//        User user = userDao.getUser(1);
+//        phoneDao.addPhone(phone);
+//
+//        return new ModelAndView("redirect:/index");
+//    }
+
+@RequestMapping(value = "/add_contact", method = RequestMethod.POST)
     public ModelAndView addPhoneForm(@RequestParam(value = "name") String name,
                                      @RequestParam(value = "last_name") String lastName,
                                      @RequestParam(value = "patronymic") String patronymic,
@@ -77,9 +82,6 @@ public class HomeController {
         return new ModelAndView("redirect:/");
     }
 
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-
     @RequestMapping("/login")
     public ModelAndView login(){
 
@@ -89,7 +91,22 @@ public class HomeController {
 
     @RequestMapping("/register")
     public ModelAndView register(){
+        System.out.println("!!! register get");
         return new ModelAndView("register");
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ModelAndView register(@RequestParam(value = "login") String login,
+                                 @RequestParam(value = "fullName") String fullName,
+                                 @RequestParam(value = "password") String password) {
+
+        System.out.println("!!!  register** method = RequestMethod.POST)");
+        userDao.addUser(new User(login, password, fullName));
+
+//        Users user = new Users(firstName, lastName, Integer.parseInt(age), email, password,
+//                userRepository.getUserProfile("USER"));
+//        userRepository.addUser(user);
+        return new ModelAndView("redirect:/");
     }
 
 

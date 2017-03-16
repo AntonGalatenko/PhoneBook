@@ -32,7 +32,7 @@
 				<h2>Please Sign In</h2>
 				<hr class="colorgraph">
 				<div class="form-group">
-                    <input type="email" name="j_username" id="email" class="form-control input-lg" placeholder="Email Address" value="neo@neo.com">
+                    <input type="login" name="j_username" id="login" class="form-control input-lg" placeholder="Login" value="neo@neo.com">
 				</div>
 				<div class="form-group">
                     <input type="password" name="j_password" id="password" class="form-control input-lg" placeholder="Password" value="123">
