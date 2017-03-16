@@ -36,7 +36,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     private List<GrantedAuthority> getGrantedAuthorities(){
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority(UserRoleEnum.USER.getUserRoleType()));
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + UserRoleEnum.USER.getUserRoleType()));
         System.out.println("authorities : " + authorities);
         return authorities;
     }

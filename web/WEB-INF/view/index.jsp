@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <title>Phone</title>
     <link type="text/css" href="/resources/css/bootstrap.min.css" rel="stylesheet">
-	<link type="text/css" href="/resources/css/butto.css" rel="stylesheet">
+	<link type="text/css" href="/resources/css/button.css" rel="stylesheet">
     <script type="text/javascript" src="/resources/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
 
@@ -46,8 +46,13 @@
     <!--
         <security:authentication property="principal.username" /><br>
     -->
-        <p id="userInfo"></p>
-		<div id="res1"></div>
+        <br>
+        <div align="right">
+            <p><a href="<c:url value="/logout" />"><img scr="/resources/img/exit.png" width="50" height="55"></a>Logout</p>
+        </div>
+            <p id="userInfo"></p>
+
+		<%--<div id="res1"></div>--%>
         <div class="table-responsive">
             <table id="mytable" class="table table-bordred table-striped">
                 <thead>
@@ -55,7 +60,10 @@
                     <th>Имя</th>
                     <th>Фамилия</th>
                     <th>Отчество</th>
-                    <th>Телефон</th>
+                    <th>Мобильный тел.</th>
+                    <th>Домашний тел.</th>
+                    <th>Адрес</th>
+                    <th>E-mail</th>
                     <th>Ред.</th>
                     <th>Удалить</th>
                     </tr>
@@ -67,6 +75,9 @@
                             <td>${item.lastName}</td>
                             <td>${item.patronymic}</td>
                             <td>${item.phoneMobile}</td>
+                            <td>${item.phoneHome}</td>
+                            <td>${item.address}</td>
+                            <td>${item.email}</td>
                             <td><p><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
 							<td><p><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete1" data-placement="top" rel="tooltip" onclick="deleteItem(${item.phoneMobile})"><span class="glyphicon glyphicon-trash"></span></button></p></td>
                         </tr>
@@ -77,18 +88,8 @@
 			<div class="container">
 			    <br><Br>
 				<section>
-			        <a href="/add_contact"><button id="js-trigger-overlay" type="button">Добавить</button></a>
+                    <button type="button" onclick="location.href='/add_contact'">Добавить</button>
 				</section>
-                <div class="clearfix"></div>
-                <ul class="pagination pull-right">
-                    <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
-                </ul>
             </div>
         </div>
         </div>
@@ -105,10 +106,10 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <input class="form-control " type="text" placeholder="Mohsin">
+                    <input class="form-control " type="text" placeholder="${editPhone.name}">
                 </div>
                 <div class="form-group">
-                    <input class="form-control " type="text" placeholder="Mohsin">
+                    <input class="form-control " type="text" placeholder="${editPhone.lastName}">
                 </div>
                 <div class="form-group">
                     <input class="form-control " type="text" placeholder="Irshad">

@@ -20,9 +20,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
 //    @Autowired
 //    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication().withUser("user").password("user").roles("USER");
-//        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
-//        auth.inMemoryAuthentication().withUser("superadmin").password("superadmin").roles("SUPERADMIN");
+//        auth.inMemoryAuthentication().withUser("neo").password("123").roles("USER");
 //    }
 
     @Autowired
@@ -53,13 +51,12 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
+//                .antMatchers("/index**").access(UserRoleEnum.USER.getUserRoleType())
                 .antMatchers("/index**").access("hasRole('" + UserRoleEnum.USER.getUserRoleType() + "')")
                 .antMatchers("/login**").permitAll()
                 .antMatchers("/register**").permitAll()
-                .antMatchers("/*").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN') or hasRole('ROLE_PRO-USER')")
                 .and().formLogin()
                 .defaultSuccessUrl("/login", false)
-
                 .loginPage("/login")
                 .loginProcessingUrl("/j_spring_security_check")
                 .usernameParameter("j_username").passwordParameter("j_password")

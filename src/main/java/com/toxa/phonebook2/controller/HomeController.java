@@ -5,14 +5,15 @@ import com.toxa.phonebook2.model.dao.UserDao;
 import com.toxa.phonebook2.model.entity.Phone;
 import com.toxa.phonebook2.model.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import sun.plugin2.message.GetAuthenticationMessage;
 
 @Controller
 public class HomeController {
-
-//    private Items items = new Items();
 
     @Autowired
     private UserDao userDao;
@@ -22,46 +23,16 @@ public class HomeController {
 
     @RequestMapping(value = {"/", "/index**"})
     public ModelAndView index(){
-        System.out.println("!!!!!!!!!!!!!!! INDEX");
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        return new ModelAndView("index","list", phoneDao.getAllPhones());
+        User user = userDao.getUser(getPrincipal());
+        return new ModelAndView("index","list", user.getPhones());
     }
 
     @RequestMapping(value = "/add_contact", method = RequestMethod.GET)
     public ModelAndView addPhonePage(){
-//        User user = new User("login", "password", "fullName");
-//        userDao.addUser(user);
-//
-//        Phone phone1 = new Phone("name1", "last name", "patronymic", "+380661234451",
-//                "0445551121", "Kyev", "email1@gmail.com", user);
-//        Phone phone2 = new Phone("name2", "last name", "patronymic", "+380661234452",
-//                "0445551122", "Kyev", "email2@gmail.com", user);
-//        Phone phone3 = new Phone("name3", "last name", "patronymic", "+380661234453",
-//                "0445551123", "Kyev", "email3@gmail.com", user);
-//        Phone phone4 = new Phone("name4", "last name", "patronymic", "+380661234454",
-//                "0445551124", "Kyev", "email4@gmail.com", user);
-//        phoneDao.addPhone(phone1);
-//        phoneDao.addPhone(phone2);
-//        phoneDao.addPhone(phone3);
-//        phoneDao.addPhone(phone4);
         return new ModelAndView("add_contact");
     }
 
-//    @RequestMapping(value = "/add_contact", method = RequestMethod.POST)
-//    public ModelAndView addPhoneForm(@ModelAttribute Phone phone){
-//        User user = userDao.getUser(1);
-//        phoneDao.addPhone(phone);
-//
-//        return new ModelAndView("redirect:/index");
-//    }
-
-@RequestMapping(value = "/add_contact", method = RequestMethod.POST)
+    @RequestMapping(value = "/add_contact", method = RequestMethod.POST)
     public ModelAndView addPhoneForm(@RequestParam(value = "name") String name,
                                      @RequestParam(value = "last_name") String lastName,
                                      @RequestParam(value = "patronymic") String patronymic,
@@ -69,7 +40,7 @@ public class HomeController {
                                      @RequestParam(value = "phone_home") String phoneHome,
                                      @RequestParam(value = "address") String address,
                                      @RequestParam(value = "email") String email){
-        User user = userDao.getUser(1);
+        User user = userDao.getUser(getPrincipal());
         phoneDao.addPhone(new Phone(name, lastName, patronymic, phoneMobile, phoneHome, address, email, user));
 
         return new ModelAndView("redirect:/index");
@@ -77,21 +48,17 @@ public class HomeController {
 
     @RequestMapping(value = "/contact/{phoneMobile}", method = RequestMethod.DELETE)
     public ModelAndView deleteItem(@PathVariable String phoneMobile){
-        System.out.println("!!!!!!!!!!!! method = RequestMethod.DELETE " + phoneMobile);
         phoneDao.deletePhone(phoneMobile);
         return new ModelAndView("redirect:/");
     }
 
     @RequestMapping("/login")
     public ModelAndView login(){
-
-        System.out.println("!!!!!!!!!!!!!!! 123");
         return new ModelAndView("login");
     }
 
     @RequestMapping("/register")
     public ModelAndView register(){
-        System.out.println("!!! register get");
         return new ModelAndView("register");
     }
 
@@ -99,17 +66,31 @@ public class HomeController {
     public ModelAndView register(@RequestParam(value = "login") String login,
                                  @RequestParam(value = "fullName") String fullName,
                                  @RequestParam(value = "password") String password) {
-
-        System.out.println("!!!  register** method = RequestMethod.POST)");
         userDao.addUser(new User(login, password, fullName));
-
-//        Users user = new Users(firstName, lastName, Integer.parseInt(age), email, password,
-//                userRepository.getUserProfile("USER"));
-//        userRepository.addUser(user);
         return new ModelAndView("redirect:/");
     }
 
+    @RequestMapping(value = "/getUserInfo")
+    public @ResponseBody String users(){
 
+        String login = getPrincipal();
+
+//        System.out.println("auth.getName() " + email);
+
+        return userDao.getUser(login).getFullName();
+    }
+
+    private String getPrincipal(){
+        String login = "";
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(principal instanceof UserDetails)
+            login = ((UserDetails)principal).getUsername();
+        else
+            login = principal.toString();
+
+        return login;
+    }
 
 
 

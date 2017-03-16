@@ -1,6 +1,9 @@
 package com.toxa.phonebook2.model.dao;
 
+import com.toxa.phonebook2.model.entity.Phone;
 import com.toxa.phonebook2.model.entity.User;
+
+import java.util.Collection;
 
 public interface UserDao {
 

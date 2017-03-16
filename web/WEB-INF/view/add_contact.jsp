@@ -46,18 +46,18 @@
 						<input type="text" class="form-control" id="phone_mobile" name="phone_mobile" placeholder="Мобильный телефон" required>
 					</div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="phone_home" name="phone_home" placeholder="Домашний телефон" required>
+                        <input type="text" class="form-control" id="phone_home" name="phone_home" placeholder="Домашний телефон" >
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="address" name="address" placeholder="Адрес" required>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Адрес" >
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="email" name="email" placeholder="E-mail" required>
+                        <input type="text" class="form-control" id="email" name="email" placeholder="E-mail" >
                     </div>
-                    <div class="form-group">
-                    <textarea class="form-control" type="textarea" id="description" name="description" placeholder="Описание" maxlength="140" rows="7"></textarea>
-                        <span class="help-block"><p id="characterLeft" class="help-block ">Вы привысилы лимит символов</p></span>
-                    </div>
+                    <%--<div class="form-group">--%>
+                    <%--<textarea class="form-control" type="textarea" id="description" name="description" placeholder="Описание" maxlength="140" rows="7"></textarea>--%>
+                        <%--<span class="help-block"><p id="characterLeft" class="help-block ">Вы привысилы лимит символов</p></span>--%>
+                    <%--</div>--%>
             
         <input type="submit" value="Добавить">
         </form>
@@ -65,26 +65,26 @@
 </div>
 </div>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-    $('#characterLeft').text('140 символов осталось');
-    $('#message').keydown(function () {
-        var max = 140;
-        var len = $(this).val().length;
-        if (len >= max) {
-            $('#characterLeft').text('Вы привысилы лимит символов');
-            $('#characterLeft').addClass('red');
-            $('#btnSubmit').addClass('disabled');            
-        } 
-        else {
-            var ch = max - len;
-            $('#characterLeft').text(ch + ' символов осталось');
-            $('#btnSubmit').removeClass('disabled');
-            $('#characterLeft').removeClass('red');            
-        }
-    });    
-});
+<%--&lt;%&ndash;<script type="text/javascript">&ndash;%&gt;--%>
+<%--&lt;%&ndash;$(document).ready(function(){ &ndash;%&gt;--%>
+    <%--&lt;%&ndash;$('#characterLeft').text('140 символов осталось');&ndash;%&gt;--%>
+    <%--&lt;%&ndash;$('#message').keydown(function () {&ndash;%&gt;--%>
+        <%--&lt;%&ndash;var max = 140;&ndash;%&gt;--%>
+        <%--&lt;%&ndash;var len = $(this).val().length;&ndash;%&gt;--%>
+        <%--&lt;%&ndash;if (len >= max) {&ndash;%&gt;--%>
+            <%--&lt;%&ndash;$('#characterLeft').text('Вы привысилы лимит символов');&ndash;%&gt;--%>
+            <%--&lt;%&ndash;$('#characterLeft').addClass('red');&ndash;%&gt;--%>
+            <%--&lt;%&ndash;$('#btnSubmit').addClass('disabled');            &ndash;%&gt;--%>
+        <%--&lt;%&ndash;} &ndash;%&gt;--%>
+        <%--&lt;%&ndash;else {&ndash;%&gt;--%>
+            <%--&lt;%&ndash;var ch = max - len;&ndash;%&gt;--%>
+            <%--&lt;%&ndash;$('#characterLeft').text(ch + ' символов осталось');&ndash;%&gt;--%>
+            <%--&lt;%&ndash;$('#btnSubmit').removeClass('disabled');&ndash;%&gt;--%>
+            <%--&lt;%&ndash;$('#characterLeft').removeClass('red');            &ndash;%&gt;--%>
+        <%--&lt;%&ndash;}&ndash;%&gt;--%>
+    <%--&lt;%&ndash;});    &ndash;%&gt;--%>
+<%--&lt;%&ndash;});&ndash;%&gt;--%>
 
-</script>
+<%--</script>--%>
 </body>
 </html>
