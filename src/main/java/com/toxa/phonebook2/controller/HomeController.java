@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import sun.plugin2.message.GetAuthenticationMessage;
 
 @Controller
 public class HomeController {
@@ -25,6 +24,26 @@ public class HomeController {
     public ModelAndView index(){
         User user = userDao.getUser(getPrincipal());
         return new ModelAndView("index","list", user.getPhones());
+    }
+
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+    public ModelAndView updatePage(@PathVariable Integer id){
+        return new ModelAndView("update", "phone", phoneDao.getPhone(id));
+    }
+
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public ModelAndView updateForm(@RequestParam(value = "id") Integer id,
+                                   @RequestParam(value = "name") String name,
+                                   @RequestParam(value = "last_name") String lastName,
+                                   @RequestParam(value = "patronymic") String patronymic,
+                                   @RequestParam(value = "phone_mobile") String phoneMobile,
+                                   @RequestParam(value = "phone_home") String phoneHome,
+                                   @RequestParam(value = "address") String address,
+                                   @RequestParam(value = "email") String email){
+        User user = userDao.getUser(getPrincipal());
+        phoneDao.updatePhone(new Phone(id, name, lastName, patronymic, phoneMobile, phoneHome, address, email, user));
+
+        return new ModelAndView("redirect:/index");
     }
 
     @RequestMapping(value = "/add_contact", method = RequestMethod.GET)
@@ -47,9 +66,9 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/contact/{phoneMobile}", method = RequestMethod.DELETE)
-    public ModelAndView deleteItem(@PathVariable String phoneMobile){
+    public String deleteItem(@PathVariable String phoneMobile){
         phoneDao.deletePhone(phoneMobile);
-        return new ModelAndView("redirect:/");
+        return "redirect:/register";
     }
 
     @RequestMapping(value = "/contact/{id}", method = RequestMethod.POST)
@@ -77,12 +96,7 @@ public class HomeController {
 
     @RequestMapping(value = "/getUserInfo")
     public @ResponseBody String users(){
-
-        String login = getPrincipal();
-
-//        System.out.println("auth.getName() " + email);
-
-        return userDao.getUser(login).getFullName();
+        return userDao.getUser(getPrincipal()).getFullName();
     }
 
     private String getPrincipal(){

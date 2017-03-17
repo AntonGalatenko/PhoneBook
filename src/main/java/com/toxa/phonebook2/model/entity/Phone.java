@@ -38,6 +38,19 @@ public class Phone {
     public Phone() {
     }
 
+    public Phone(Integer id, String name, String lastName, String patronymic, String phoneMobile, String phoneHome,
+                 String address, String email, User user) {
+        this.id = id;
+        this.name = name;
+        this.lastName = lastName;
+        this.patronymic = patronymic;
+        this.phoneMobile = phoneMobile;
+        this.phoneHome = phoneHome;
+        this.address = address;
+        this.email = email;
+        this.user = user;
+    }
+
     public Phone(String name, String lastName, String patronymic, String phoneMobile, String phoneHome,
                  String address, String email, User user) {
         this.name = name;

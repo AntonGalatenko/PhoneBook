@@ -16,33 +16,18 @@ public class UserDaoImpl implements UserDao{
 
     @Transactional
     public User addUser(User user) {
-//        Session session = sessionFactory.openSession();
-//        session.beginTransaction();
-
-//        UserRole role = (UserRole)session.createCriteria(UserRole.class)
-//                .add(Restrictions.eq("type", UserRoleEnum.USER.getUserRoleType())).uniqueResult();
-//        user.setRole(role);
-
         sessionFactory.getCurrentSession().save(user);
-//        session.getTransaction().commit();
-//        session.close();
         return user;
     }
 
     @Transactional
     public void updateUser(User user) {
-//        Session session = sessionFactory.openSession();
-//        session.beginTransaction();
         sessionFactory.getCurrentSession().saveOrUpdate(user);
-//        session.getTransaction().commit();
-//        session.close();
     }
 
     @Transactional
     public User getUser(Integer id) {
-//        Session session = sessionFactory.openSession();
         User user = (User) sessionFactory.getCurrentSession().createCriteria(User.class).add(Restrictions.eq("id", id)).uniqueResult();
-//        session.close();
         return user;
     }
 
@@ -54,10 +39,6 @@ public class UserDaoImpl implements UserDao{
 
     @Transactional
     public void deleteUser(User user) {
-//        Session session = sessionFactory.openSession();
-//        session.beginTransaction();
         sessionFactory.getCurrentSession().remove(user);
-//        session.getTransaction().commit();
-//        session.close();
     }
 }

@@ -2,12 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
     <title>Login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
-        /* Credit to bootsnipp.com for the css for the color graph */
 .colorgraph {
   height: 5px;
   border-top: 0;
@@ -52,10 +50,6 @@
 					</div>
 				</div>
 			</fieldset>
-<!--
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" />
--->
 		</form>
 	</div>
 </div>

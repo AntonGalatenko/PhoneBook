@@ -5,7 +5,6 @@
 
 <head>
     <meta charset="utf-8">
-    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
     <title>Simple Contact Form - Bootsnipp.com</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
@@ -54,37 +53,10 @@
                     <div class="form-group">
                         <input type="text" class="form-control" id="email" name="email" placeholder="E-mail" >
                     </div>
-                    <%--<div class="form-group">--%>
-                    <%--<textarea class="form-control" type="textarea" id="description" name="description" placeholder="Описание" maxlength="140" rows="7"></textarea>--%>
-                        <%--<span class="help-block"><p id="characterLeft" class="help-block ">Вы привысилы лимит символов</p></span>--%>
-                    <%--</div>--%>
-            
         <input type="submit" value="Добавить">
         </form>
     </div>
 </div>
 </div>
-
-<%--&lt;%&ndash;<script type="text/javascript">&ndash;%&gt;--%>
-<%--&lt;%&ndash;$(document).ready(function(){ &ndash;%&gt;--%>
-    <%--&lt;%&ndash;$('#characterLeft').text('140 символов осталось');&ndash;%&gt;--%>
-    <%--&lt;%&ndash;$('#message').keydown(function () {&ndash;%&gt;--%>
-        <%--&lt;%&ndash;var max = 140;&ndash;%&gt;--%>
-        <%--&lt;%&ndash;var len = $(this).val().length;&ndash;%&gt;--%>
-        <%--&lt;%&ndash;if (len >= max) {&ndash;%&gt;--%>
-            <%--&lt;%&ndash;$('#characterLeft').text('Вы привысилы лимит символов');&ndash;%&gt;--%>
-            <%--&lt;%&ndash;$('#characterLeft').addClass('red');&ndash;%&gt;--%>
-            <%--&lt;%&ndash;$('#btnSubmit').addClass('disabled');            &ndash;%&gt;--%>
-        <%--&lt;%&ndash;} &ndash;%&gt;--%>
-        <%--&lt;%&ndash;else {&ndash;%&gt;--%>
-            <%--&lt;%&ndash;var ch = max - len;&ndash;%&gt;--%>
-            <%--&lt;%&ndash;$('#characterLeft').text(ch + ' символов осталось');&ndash;%&gt;--%>
-            <%--&lt;%&ndash;$('#btnSubmit').removeClass('disabled');&ndash;%&gt;--%>
-            <%--&lt;%&ndash;$('#characterLeft').removeClass('red');            &ndash;%&gt;--%>
-        <%--&lt;%&ndash;}&ndash;%&gt;--%>
-    <%--&lt;%&ndash;});    &ndash;%&gt;--%>
-<%--&lt;%&ndash;});&ndash;%&gt;--%>
-
-<%--</script>--%>
 </body>
 </html>
