@@ -20,44 +20,30 @@ public class PhoneDaoImpl implements PhoneDao{
 
     @Transactional
     public Phone addPhone(Phone phone) {
-//        Session session = sessionFactory.openSession();
-//        session.beginTransaction();
         sessionFactory.getCurrentSession().save(phone);
-//        session.getTransaction().commit();
-//        session.close();
         return phone;
     }
 
     @Transactional
     public void updatePhone(Phone phone) {
-//        Session session = sessionFactory.openSession();
-//        session.beginTransaction();
         sessionFactory.getCurrentSession().saveOrUpdate(phone);
-//        session.getTransaction().commit();
-//        session.close();
     }
 
     @Transactional
     public Phone getPhone(Integer id) {
-//        Session session = sessionFactory.openSession();
         Phone phone = (Phone) sessionFactory.getCurrentSession().createCriteria(Phone.class).add(Restrictions.eq("id", id)).uniqueResult();
-//        session.close();
         return phone;
     }
 
     @Transactional
     public Phone getPhone(String phoneMobile) {
-//        Session session = sessionFactory.openSession();
         Phone phone = (Phone) sessionFactory.getCurrentSession().createCriteria(Phone.class).add(Restrictions.eq("phoneMobile", phoneMobile)).uniqueResult();
-//        session.close();
         return phone;
     }
 
     @Transactional
     public Collection<Phone> getAllPhones() {
-//        Session session = sessionFactory.openSession();
         List<Phone> phoneList = (List<Phone>) sessionFactory.getCurrentSession().createCriteria(Phone.class).setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY).list();
-//        session.close();
         return phoneList;
     }
 
@@ -66,11 +52,7 @@ public class PhoneDaoImpl implements PhoneDao{
         if(phoneMobile.indexOf("+") != 0)
             phoneMobile = "+" + phoneMobile;
 
-//        Session session = sessionFactory.openSession();
-//        session.beginTransaction();
         Phone phone = (Phone) sessionFactory.getCurrentSession().createCriteria(Phone.class).add(Restrictions.eq("phoneMobile", phoneMobile)).uniqueResult();
         sessionFactory.getCurrentSession().delete(phone);
-//        session.getTransaction().commit();
-//        session.close();
     }
 }

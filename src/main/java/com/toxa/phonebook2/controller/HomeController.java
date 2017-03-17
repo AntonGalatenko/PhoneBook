@@ -52,6 +52,11 @@ public class HomeController {
         return new ModelAndView("redirect:/");
     }
 
+    @RequestMapping(value = "/contact/{id}", method = RequestMethod.POST)
+    public @ResponseBody Phone getItem(@PathVariable String id){
+        return phoneDao.getPhone(id);
+    }
+
     @RequestMapping("/login")
     public ModelAndView login(){
         return new ModelAndView("login");

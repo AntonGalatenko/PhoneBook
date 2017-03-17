@@ -25,8 +25,22 @@
         });
       });
     </script>
-	
-	<script>  
+
+
+    <script>
+        function getPhone(id){
+            $.ajax({
+                type: "POST",
+                url: "/contact/" + id,
+                success: function(data){
+                    $("#editPhone").data(data);
+                }
+            });
+        }
+    </script>
+
+
+	<script>
         function deleteItem(phone){
           $.ajax({
             type: "DELETE",
@@ -78,7 +92,7 @@
                             <td>${item.phoneHome}</td>
                             <td>${item.address}</td>
                             <td>${item.email}</td>
-                            <td><p><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                            <td><p><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" rel="tooltip" onclick="getPhone(${item.id})"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
 							<td><p><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete1" data-placement="top" rel="tooltip" onclick="deleteItem(${item.phoneMobile})"><span class="glyphicon glyphicon-trash"></span></button></p></td>
                         </tr>
                     </c:forEach>
@@ -100,6 +114,7 @@
 <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            <div id="editPhone>"
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title custom_align" id="Heading">Редактирование</h4>
@@ -120,6 +135,7 @@
             </div>
             <div class="modal-footer ">
                 <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Обновить</button>
+            </div>
             </div>
         </div>
     <!-- /.modal-content --> 
