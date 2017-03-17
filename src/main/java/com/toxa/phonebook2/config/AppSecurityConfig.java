@@ -18,11 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication().withUser("neo").password("123").roles("USER");
-//    }
-
     @Autowired
     @Qualifier("customUserDetailsService")
     UserDetailsService userDetailsService;
@@ -51,7 +46,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-//                .antMatchers("/index**").access(UserRoleEnum.USER.getUserRoleType())
                 .antMatchers("/index**").access("hasRole('" + UserRoleEnum.USER.getUserRoleType() + "')")
                 .antMatchers("/login**").permitAll()
                 .antMatchers("/register**").permitAll()
@@ -60,7 +54,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .loginProcessingUrl("/j_spring_security_check")
                 .usernameParameter("j_username").passwordParameter("j_password")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/index")
                 .and().rememberMe()
                 .and().csrf().disable();
 
